@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sports Registration | GEC Bilaspur</title>
+
+    <style>
+      /* =========================
+           RESET
+        ========================= */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* =========================
+           BODY
+        ========================= */
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f4f4f4;
+        color: #222;
+        min-height: 100vh;
+      }
+
+      /* =========================
+           HEADER
+        ========================= */
+
+      header {
+        width: 100%;
+        background: #111;
+        color: white;
+
+        padding: 18px 6%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+      }
+
+      .logo {
+        font-size: 25px;
+        font-weight: bold;
+      }
+
+      nav {
+        display: flex;
+        gap: 25px;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        color: #e63946;
+      }
+
+      /* =========================
+           HERO
+        ========================= */
+
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75));
+
+        color: white;
+
+        text-align: center;
+
+        padding: 55px 20px;
+      }
+
+      .hero h1 {
+        font-size: clamp(32px, 6vw, 55px);
+        margin-bottom: 12px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+      .container {
+        width: 92%;
+        max-width: 900px;
+
+        margin: 40px auto;
+      }
+
+      /* =========================
+           REGISTRATION CARD
+        ========================= */
+
+      .registration-card {
+        background: white;
+
+        padding: 35px;
+
+        border-radius: 18px;
+
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .registration-card h2 {
+        text-align: center;
+
+        font-size: 30px;
+
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        text-align: center;
+
+        color: #666;
+
+        margin-bottom: 30px;
+      }
+
+      /* =========================
+           FORM
+        ========================= */
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+
+        font-weight: bold;
+
+        margin-bottom: 8px;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+
+        padding: 14px;
+
+        border: 1px solid #ccc;
+
+        border-radius: 8px;
+
+        font-size: 16px;
+
+        outline: none;
+
+        background: white;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: #111;
+      }
+
+      /* =========================
+           STUDENT DETAILS GRID
+        ========================= */
+
+      .student-details {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 20px;
+      }
+
+      /* =========================
+           SPORTS SECTION
+        ========================= */
+
+      .sports-section {
+        margin-top: 30px;
+      }
+
+      .sports-title {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 15px;
+      }
+
+      .sports-title h3 {
+        font-size: 22px;
+      }
+
+      .counter {
+        background: #111;
+
+        color: white;
+
+        padding: 7px 12px;
+
+        border-radius: 20px;
+
+        font-size: 14px;
+      }
+
+      .instruction {
+        background: #f1f1f1;
+
+        padding: 12px;
+
+        border-radius: 8px;
+
+        margin-bottom: 20px;
+
+        font-size: 14px;
+
+        color: #555;
+      }
+
+      /* =========================
+           SPORTS GRID
+        ========================= */
+
+      .sports-grid {
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 15px;
+      }
+
+      .sport-option {
+        position: relative;
+      }
+
+      .sport-option input {
+        position: absolute;
+
+        opacity: 0;
+      }
+
+      .sport-option label {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        min-height: 75px;
+
+        padding: 15px;
+
+        border: 2px solid #ddd;
+
+        border-radius: 12px;
+
+        cursor: pointer;
+
+        font-weight: bold;
+
+        text-align: center;
+
+        transition: 0.2s;
+      }
+
+      .sport-option label:hover {
+        border-color: #111;
+      }
+
+      .sport-option input:checked + label {
+        background: #111;
+
+        color: white;
+
+        border-color: #111;
+      }
+
+      /* =========================
+           ERROR
+        ========================= */
+
+      .error-message {
+        display: none;
+
+        background: #ffe5e5;
+
+        color: #b00020;
+
+        padding: 12px;
+
+        border-radius: 8px;
+
+        margin-top: 15px;
+
+        font-weight: bold;
+      }
+
+      /* =========================
+           SUBMIT BUTTON
+        ========================= */
+
+      .submit-btn {
+        width: 100%;
+
+        margin-top: 30px;
+
+        padding: 16px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        background: #e63946;
+
+        color: white;
+
+        font-size: 18px;
+
+        font-weight: bold;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .submit-btn:hover {
+        background: #c92f3c;
+      }
+
+      .submit-btn:disabled {
+        background: #aaa;
+
+        cursor: not-allowed;
+      }
+
+      /* =========================
+           SUCCESS MESSAGE
+        ========================= */
+
+      .success-box {
+        display: none;
+
+        margin-top: 25px;
+
+        padding: 25px;
+
+        background: #e8f8ed;
+
+        border-left: 5px solid #2e7d32;
+
+        border-radius: 8px;
+      }
+
+      .success-box h3 {
+        color: #2e7d32;
+
+        margin-bottom: 12px;
+      }
+
+      .success-box p {
+        margin: 7px 0;
+      }
+
+      /* =========================
+           FOOTER
+        ========================= */
+
+      footer {
+        background: #111;
+
+        color: white;
+
+        text-align: center;
+
+        padding: 25px;
+
+        margin-top: 50px;
+      }
+
+      /* =========================
+           TABLET
+        ========================= */
+
+      @media (max-width: 700px) {
+        header {
+          flex-direction: column;
+
+          text-align: center;
+        }
+
+        nav {
+          gap: 15px;
+
+          flex-wrap: wrap;
+
+          justify-content: center;
+        }
+
+        .student-details {
+          grid-template-columns: 1fr;
+        }
+
+        .registration-card {
+          padding: 25px 18px;
+        }
+      }
+
+      /* =========================
+           MOBILE
+        ========================= */
+
+      @media (max-width: 500px) {
+        .hero {
+          padding: 40px 15px;
+        }
+
+        .hero h1 {
+          font-size: 35px;
+        }
+
+        .hero p {
+          font-size: 15px;
+        }
+
+        .container {
+          width: 94%;
+
+          margin: 25px auto;
+        }
+
+        .registration-card {
+          padding: 22px 15px;
+        }
+
+        .registration-card h2 {
+          font-size: 25px;
+        }
+
+        .sports-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sports-title {
+          align-items: flex-start;
+
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =================================
+     HEADER
+================================= -->
+
+    <header>
+      <div class="logo">CGIT Bilaspur</div>
+
+      <nav>
+        <a href="index.html"> Home </a>
+
+        <a href="sports.html"> Sports </a>
+
+        <a href="events.html"> Events </a>
+
+        <a href="contact.html"> Contact </a>
+      </nav>
+    </header>
+
+    <!-- =================================
+     HERO
+================================= -->
+
+    <section class="hero">
+      <h1>Sports Registration</h1>
+
+      <p>Government Engineering College, Bilaspur</p>
+    </section>
+
+    <!-- =================================
+     MAIN
+================================= -->
+
+    <main class="container">
+      <div class="registration-card">
+        <h2>Student Sports Registration</h2>
+
+        <p class="subtitle">Register yourself and select exactly 3 sports.</p>
+
+        <!-- =========================
+             FORM
+        ========================== -->
+
+        <form id="sportsForm">
+          <!-- ENROLLMENT -->
+
+          <div class="form-group">
+            <label for="enrollment"> Enrollment Number </label>
+
+            <input
+              type="text"
+              id="enrollment"
+              placeholder="Enter your enrollment number"
+              required
+            />
+          </div>
+
+          <!-- STUDENT DETAILS -->
+
+          <div class="student-details">
+            <!-- DEPARTMENT -->
+
+            <div class="form-group">
+              <label for="department"> Department </label>
+
+              <select id="department" required>
+                <option value="">Select Department</option>
+
+                <option value="Computer Science Engineering">
+                  Computer Science Engineering
+                </option>
+
+                <option value="Information Technology">
+                  Information Technology
+                </option>
+
+                <option value="Electronics and Telecommunication">
+                  Electronics & Telecommunication
+                </option>
+
+                <option value="Electrical Engineering">
+                  Electrical Engineering
+                </option>
+
+                <option value="Mechanical Engineering">
+                  Mechanical Engineering
+                </option>
+
+                <option value="Civil Engineering">Civil Engineering</option>
+
+                <option value="Mining Engineering">Mining Engineering</option>
+
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- YEAR -->
+
+            <div class="form-group">
+              <label for="year"> Year </label>
+
+              <select id="year" required>
+                <option value="">Select Year</option>
+
+                <option value="1st Year">1st Year</option>
+
+                <option value="2nd Year">2nd Year</option>
+
+                <option value="3rd Year">3rd Year</option>
+
+                <option value="4th Year">4th Year</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- =========================
+                 SPORTS
+            ========================== -->
+
+          <div class="sports-section">
+            <div class="sports-title">
+              <h3>Select Your Sports</h3>
+
+              <div class="counter">
+                <span id="selectedCount"> 0 </span>
+                / 3 Selected
+              </div>
+            </div>
+
+            <div class="instruction">
+              ⚠️ You must select
+              <strong>exactly 3 sports</strong>. You cannot select more than 3.
+            </div>
+
+            <div class="sports-grid">
+              <!-- CRICKET -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="cricket"
+                  name="sports"
+                  value="Cricket"
+                />
+
+                <label for="cricket"> 🏏 Cricket </label>
+              </div>
+
+              <!-- FOOTBALL -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="football"
+                  name="sports"
+                  value="Football"
+                />
+
+                <label for="football"> ⚽ Football </label>
+              </div>
+
+              <!-- HOCKEY -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="hockey"
+                  name="sports"
+                  value="Hockey"
+                />
+
+                <label for="hockey"> 🏑 Hockey </label>
+              </div>
+
+              <!-- BASKETBALL -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="basketball"
+                  name="sports"
+                  value="Basketball"
+                />
+
+                <label for="basketball"> 🏀 Basketball </label>
+              </div>
+
+              <!-- VOLLEYBALL -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="volleyball"
+                  name="sports"
+                  value="Volleyball"
+                />
+
+                <label for="volleyball"> 🏐 Volleyball </label>
+              </div>
+
+              <!-- BADMINTON -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="badminton"
+                  name="sports"
+                  value="Badminton"
+                />
+
+                <label for="badminton"> 🏸 Badminton </label>
+              </div>
+
+              <!-- ATHLETICS -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="athletics"
+                  name="sports"
+                  value="Athletics"
+                />
+
+                <label for="athletics"> 🏃 Athletics </label>
+              </div>
+
+              <!-- CHESS -->
+
+              <div class="sport-option">
+                <input type="checkbox" id="chess" name="sports" value="Chess" />
+
+                <label for="chess"> ♟️ Chess </label>
+              </div>
+
+              <!-- TABLE TENNIS -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="tabletennis"
+                  name="sports"
+                  value="Table Tennis"
+                />
+
+                <label for="tabletennis"> 🏓 Table Tennis </label>
+              </div>
+
+              <!-- KABADDI -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="kabaddi"
+                  name="sports"
+                  value="Kabaddi"
+                />
+
+                <label for="kabaddi"> 🤼 Kabaddi </label>
+              </div>
+
+              <!-- CARROM -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="carrom"
+                  name="sports"
+                  value="Carrom"
+                />
+
+                <label for="carrom"> 🎯 Carrom </label>
+              </div>
+
+              <!-- ATHLETICS -->
+
+              <div class="sport-option">
+                <input
+                  type="checkbox"
+                  id="running"
+                  name="sports"
+                  value="Running"
+                />
+
+                <label for="running"> 🏃 Running </label>
+              </div>
+            </div>
+
+            <!-- ERROR -->
+
+            <div id="errorMessage" class="error-message"></div>
+          </div>
+
+          <!-- SUBMIT -->
+
+          <button type="submit" class="submit-btn" id="submitButton">
+            Submit Sports Registration
+          </button>
+        </form>
+
+        <!-- =========================
+             SUCCESS
+        ========================== -->
+
+        <div id="successBox" class="success-box">
+          <h3>✅ Registration Successful!</h3>
+
+          <p>
+            <strong>Enrollment:</strong>
+            <span id="successEnrollment"></span>
+          </p>
+
+          <p>
+            <strong>Department:</strong>
+            <span id="successDepartment"></span>
+          </p>
+
+          <p>
+            <strong>Year:</strong>
+            <span id="successYear"></span>
+          </p>
+
+          <p>
+            <strong>Selected Sports:</strong>
+            <span id="successSports"></span>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- =================================
+     FOOTER
+================================= -->
+
+    <footer>
+      <p>© 2026 Government Engineering College, Bilaspur</p>
+
+      <p>Sports Department</p>
+    </footer>
+
+    <script>
+      /* =================================
+       GET ELEMENTS
+    ================================= */
+
+      const sportsForm = document.getElementById("sportsForm");
+
+      const sportCheckboxes = document.querySelectorAll('input[name="sports"]');
+
+      const selectedCount = document.getElementById("selectedCount");
+
+      const errorMessage = document.getElementById("errorMessage");
+
+      const submitButton = document.getElementById("submitButton");
+
+      /* =================================
+       UPDATE SPORTS COUNT
+    ================================= */
+
+      function updateCount() {
+        const selected = document.querySelectorAll(
+          'input[name="sports"]:checked',
+        );
+
+        const count = selected.length;
+
+        selectedCount.textContent = count;
+
+        /*
+         * Do not allow more than 3.
+         */
+
+        if (count >= 3) {
+          sportCheckboxes.forEach((checkbox) => {
+            if (!checkbox.checked) {
+              checkbox.disabled = true;
+            }
+          });
+        } else {
+          sportCheckboxes.forEach((checkbox) => {
+            checkbox.disabled = false;
+          });
+        }
+
+        /*
+         * Change counter when exactly 3.
+         */
+
+        if (count === 3) {
+          selectedCount.parentElement.style.background = "#2e7d32";
+        } else {
+          selectedCount.parentElement.style.background = "#111";
+        }
+      }
+
+      /* =================================
+       CHECKBOX EVENT
+    ================================= */
+
+      sportCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener("change", function () {
+          updateCount();
+        });
+      });
+
+      /* =================================
+       SHOW ERROR
+    ================================= */
+
+      function showError(message) {
+        errorMessage.textContent = message;
+
+        errorMessage.style.display = "block";
+      }
+
+      /* =================================
+       HIDE ERROR
+    ================================= */
+
+      function hideError() {
+        errorMessage.style.display = "none";
+      }
+
+      /* =================================
+       FORM SUBMIT
+    ================================= */
+
+      sportsForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        hideError();
+
+        /* =========================
+               GET STUDENT DATA
+            ========================= */
+
+        const enrollment = document.getElementById("enrollment").value.trim();
+
+        const department = document.getElementById("department").value;
+
+        const year = document.getElementById("year").value;
+
+        /* =========================
+               VALIDATE ENROLLMENT
+            ========================= */
+
+        if (enrollment === "") {
+          showError("Please enter your enrollment number.");
+
+          return;
+        }
+
+        /* =========================
+               VALIDATE DEPARTMENT
+            ========================= */
+
+        if (department === "") {
+          showError("Please select your department.");
+
+          return;
+        }
+
+        /* =========================
+               VALIDATE YEAR
+            ========================= */
+
+        if (year === "") {
+          showError("Please select your year.");
+
+          return;
+        }
+
+        /* =========================
+               GET SPORTS
+            ========================= */
+
+        const selectedSports = Array.from(
+          document.querySelectorAll('input[name="sports"]:checked'),
+        ).map((checkbox) => checkbox.value);
+
+        /* =========================
+               EXACTLY 3 SPORTS
+            ========================= */
+
+        if (selectedSports.length < 3) {
+          showError("Please select at least 3 sports.");
+
+          return;
+        }
+
+        if (selectedSports.length > 3) {
+          showError("You cannot select more than 3 sports.");
+
+          return;
+        }
+
+        /* =========================
+               CREATE REGISTRATION
+            ========================= */
+
+        const registration = {
+          enrollment: enrollment,
+
+          department: department,
+
+          year: year,
+
+          sports: selectedSports,
+
+          registrationDate: new Date().toLocaleString(),
+        };
+
+        /* =========================
+               GET OLD REGISTRATIONS
+            ========================= */
+
+        let registrations =
+          JSON.parse(localStorage.getItem("sportsRegistrations")) || [];
+
+        /* =========================
+               PREVENT DUPLICATE
+            ========================= */
+
+        const alreadyRegistered = registrations.some(
+          (student) =>
+            student.enrollment.toLowerCase() === enrollment.toLowerCase(),
+        );
+
+        if (alreadyRegistered) {
+          showError("This enrollment number has already registered.");
+
+          return;
+        }
+
+        /* =========================
+               SAVE REGISTRATION
+            ========================= */
+
+        registrations.push(registration);
+
+        localStorage.setItem(
+          "sportsRegistrations",
+          JSON.stringify(registrations),
+        );
+
+        /* =========================
+               SHOW SUCCESS
+            ========================= */
+
+        document.getElementById("successEnrollment").textContent = enrollment;
+
+        document.getElementById("successDepartment").textContent = department;
+
+        document.getElementById("successYear").textContent = year;
+
+        document.getElementById("successSports").textContent =
+          selectedSports.join(", ");
+
+        document.getElementById("successBox").style.display = "block";
+
+        /* =========================
+               RESET FORM
+            ========================= */
+
+        sportsForm.reset();
+
+        updateCount();
+
+        /* =========================
+               SCROLL TO SUCCESS
+            ========================= */
+
+        document.getElementById("successBox").scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+
+      /* =================================
+       INITIAL COUNT
+    ================================= */
+
+      updateCount();
+    </script>
+  </body>
+</html>
